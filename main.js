@@ -7,18 +7,35 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+const geometry = new THREE.BoxGeometry( .2, .2, .2 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+
+let insects = []
+const INSECT_COUNT = 10;
+
+for(let i = 0; i < INSECT_COUNT; i++)
+{
+	const insect = new THREE.Mesh( geometry, material );
+	insect.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+	insects.push(insect);
+	scene.add(insect);
+}
+
+function updateInsects()
+{
+	insects.forEach(insect => {
+		insect.rotation.x += 0.01;
+		insect.rotation.y += 0.01;
+	});
+}
 
 camera.position.z = 5;
 
-function animate() {
+function animate()
+{
 	requestAnimationFrame( animate );
 
-	cube.rotation.x += 0.01;
-	cube.rotation.y += 0.01;
+	updateInsects();
 
 	renderer.render( scene, camera );
 }
