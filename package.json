@@ -1,9 +1,9 @@
 {
-  "name": "threejs-insect-boid",
+  "name": "threejs-insectboid",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://bpepitoneperez.github.io/ThreeJs-Insect-Boid/",
+  "homepage": "https://bpepitoneperez.github.io/ThreeJs-InsectBoid/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
