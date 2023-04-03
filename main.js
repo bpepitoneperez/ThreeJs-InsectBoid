@@ -57,7 +57,7 @@ function separation(insect, insects)
 // Apply the alignment rule (Fly in the same direction)
 function alignment(insect, insects)
 {
-  let alignmentDistance = 20;
+  let alignmentDistance = 30;
   let alignmentVector = new THREE.Vector3();
   let neighborCount = 0;
   let insectPosition = insect.position.clone();
@@ -126,8 +126,9 @@ function applyRandomMovement(insect) {
 function updateInsects() 
 {
 	insects.forEach((insect, index) => {
-		// Make the insect look at the goal
+		// Make the insect look at the goal and move forwards
 		insect.lookAt(0, 0, 0);
+		insect.translateZ(0.5);
 
 		let insectsLeft = insects.slice(0);
 		insectsLeft.splice(index, 1);
@@ -143,6 +144,28 @@ function updateInsects()
 		if (insect.velocity.length() > maxVelocity)
 		{
 		  insect.velocity.normalize();
+		}
+
+		// Wrap the insect around the screen
+		var halfWidth = window.innerWidth / 2;
+		var halfHeight = window.innerHeight / 2;
+  
+		if (insect.position.x < -halfWidth)
+		{
+		  insect.position.x = halfWidth;
+		}
+		else if (insect.position.x > halfWidth)
+		{
+		  insect.position.x = -halfWidth;
+		}
+  
+		if (insect.position.y < -halfHeight)
+		{
+		  insect.position.y = halfHeight;
+		}
+		else if (insect.position.y > halfHeight)
+		{
+		  insect.position.y = -halfHeight;
 		}
   
 		// Update the insect's position
